@@ -1,0 +1,124 @@
+<template>
+    <lightning-card title="Twin Field Mapping Manager">
+        <div class="slds-p-around_small">
+            <lightning-button label="Add Mapping" onclick={handleAddRow}></lightning-button>
+            <lightning-button
+                class="slds-m-left_x-small"
+                variant="brand"
+                label="Save"
+                onclick={handleSave}
+            ></lightning-button>
+        </div>
+
+        <template if:true={isLoading}>
+            <div class="slds-p-around_small">
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+            <template if:true={mappings.length}>
+                <div class="slds-p-horizontal_small slds-p-bottom_small">
+                    <template for:each={mappings} for:item="row" for:index="index">
+                        <div key={row.key} class="slds-box slds-m-bottom_small">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" class="slds-m-bottom_small">
+                                    <lightning-input
+                                        type="text"
+                                        label="Record Id"
+                                        value={row.id}
+                                        readonly
+                                    ></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="slds-m-bottom_small">
+                                    <lightning-input
+                                        type="text"
+                                        label="Label"
+                                        value={row.label}
+                                        name="label"
+                                        data-index={index}
+                                        data-field="label"
+                                        onchange={handleFieldChange}
+                                    ></lightning-input>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="6" class="slds-p-right_small">
+                                    <lightning-combobox
+                                        label="Source Field (QuoteLineItem)"
+                                        value={row.sourceField}
+                                        options={sourceFieldOptions}
+                                        name="sourceField"
+                                        data-index={index}
+                                        data-field="sourceField"
+                                        onchange={handleFieldChange}
+                                    ></lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="6">
+                                    <lightning-combobox
+                                        label="Target Field (OpportunityLineItem)"
+                                        value={row.targetField}
+                                        options={targetFieldOptions}
+                                        name="targetField"
+                                        data-index={index}
+                                        data-field="targetField"
+                                        onchange={handleFieldChange}
+                                    ></lightning-combobox>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="4" class="slds-p-right_small slds-m-top_small">
+                                    <lightning-combobox
+                                        label="Overwrite Rule"
+                                        value={row.overwriteRule}
+                                        options={overwriteRuleOptions}
+                                        name="overwriteRule"
+                                        data-index={index}
+                                        data-field="overwriteRule"
+                                        onchange={handleFieldChange}
+                                    ></lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="4" class="slds-p-right_small slds-m-top_small">
+                                    <lightning-combobox
+                                        label="Transform"
+                                        value={row.transform}
+                                        options={transformOptions}
+                                        name="transform"
+                                        data-index={index}
+                                        data-field="transform"
+                                        onchange={handleFieldChange}
+                                    ></lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="2" class="slds-m-top_small">
+                                    <lightning-input
+                                        type="toggle"
+                                        label="Active"
+                                        checked={row.isActive}
+                                        name="isActive"
+                                        data-index={index}
+                                        data-field="isActive"
+                                        onchange={handleToggleChange}
+                                    ></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="2" class="slds-m-top_large slds-text-align_right">
+                                    <lightning-button-icon
+                                        icon-name="utility:delete"
+                                        alternative-text="Remove"
+                                        variant="border-filled"
+                                        title="Remove"
+                                        data-index={index}
+                                        onclick={handleRemoveRow}
+                                    ></lightning-button-icon>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template if:false={mappings.length}>
+                <div class="slds-p-around_small slds-text-color_weak">
+                    No mappings yet. Add one to get started.
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>

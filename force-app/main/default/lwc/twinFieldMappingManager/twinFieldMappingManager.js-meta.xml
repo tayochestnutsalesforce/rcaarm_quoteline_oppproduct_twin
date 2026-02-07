@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>59.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property
+                name="useProvidedMappings"
+                type="Boolean"
+                label="Use Provided Mappings"
+                description="If true, use mappingsJson input instead of querying saved mappings."
+            />
+            <property
+                name="mappingsJson"
+                type="String"
+                label="Mappings JSON"
+                description="JSON array of mapping rows to prepopulate the UI."
+            />
+            <property
+                name="useSessionDraft"
+                type="Boolean"
+                label="Use Session Draft"
+                description="If true, persist in-progress rows in session storage."
+            />
+            <property
+                name="mappingsOutputJson"
+                type="String"
+                label="Mappings Output JSON"
+                role="outputOnly"
+                description="JSON array of mapping rows after Save."
+            />
+            <property
+                name="deletedIdsJson"
+                type="String"
+                label="Deleted Ids JSON"
+                role="outputOnly"
+                description="JSON array of deleted mapping record Ids."
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
