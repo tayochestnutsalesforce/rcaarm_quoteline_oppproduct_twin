@@ -1,3 +1,6 @@
+/**
+ * @description Controller for mapping admin UI and persistence.
+ */
 public with sharing class TwinFieldMappingController {
     private static final String SOURCE_OBJECT = 'QuoteLineItem';
     private static final String TARGET_OBJECT = 'OpportunityLineItem';

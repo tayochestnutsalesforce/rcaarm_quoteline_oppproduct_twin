@@ -1,3 +1,6 @@
+/**
+ * @description Flow invocable to reconcile mapping JSON into records.
+ */
 public with sharing class TwinFieldFlowReconcileInvocable {
     public class Request {
         @InvocableVariable public String mappingsJson;
